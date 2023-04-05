@@ -1,7 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
 
 body {
+    margin: 0;
+    padding: 0;
     font-family: 'Gaegu';
+    background-color: #AAD0D9;
 }
 
 table {
@@ -16,13 +19,14 @@ table {
 }
 
 .container>div {
-    padding: 20px 0;
+    padding: 0px 0;
     font-size: 30px;
 }
 
 .item1 {
     grid-column-start: 1;
     grid-column-end: 3;
+
 }
 
 .item1 a {
@@ -32,4 +36,33 @@ table {
 
 .item1 a:hover {
     font-style: italic;
+}
+
+.gambar img {
+    width: 480px;
+    position: absolute;
+}
+
+.tanggal {
+    position: relative;
+    margin-top: 340px;
+    margin-left: 190px;
+    font-size: 25px;
+}
+
+.tanggal h4 {
+    margin: 0;
+}
+
+.item2 td {
+    padding: 0 10px;
+}
+
+.date {
+    height: 45px;
+    width: 25px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+
 }
