@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu:wght@700&display=swap');
+
+body {
+    font-family: 'Gaegu';
+}
+
+table {
+    color: #5C3F5B;
+    font-size: 33px;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+}
+
+.container>div {
+    padding: 20px 0;
+    font-size: 30px;
+}
+
+.item1 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.item1 a {
+    text-decoration: none;
+    color: #5C3F5B;
+}
+
+.item1 a:hover {
+    font-style: italic;
+}
