@@ -21,7 +21,7 @@ if (!isset($_SESSION['id'])) {
             <li><a class="active" href="#home">Home</a></li>
             <li><a href="#news">News</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li style="float:right"><a href="#about">About</a></li>
+            <li style="float:right"><a href="/logout">Logout</a></li>
         </ul>
     </header>
 
@@ -95,6 +95,7 @@ if (!isset($_SESSION['id'])) {
         </div>
     </main>
     <script>
+        let okaydae = false;
         var eventDay = document.querySelector(".event-day");
         var eventDate = document.querySelector(".event-date");
 
@@ -103,6 +104,7 @@ if (!isset($_SESSION['id'])) {
         var modal = document.getElementById("myModal");
         var span = document.getElementsByClassName("close")[0];
         var addEventSubmit = document.getElementById("simpan");
+        var eventsContainer = document.querySelector(".events");
         var eventsContainer = document.querySelector(".events");
 
         var date = new Date();
@@ -192,18 +194,29 @@ if (!isset($_SESSION['id'])) {
                 weekdays--;
             }
 
+
             while (counter <= numOfDays) {
                 if (weekdays2 > 6) {
                     weekdays2 = 0;
                     htmlContent += "</ul><ul>";
                 }
+                updateEvents(new Date(year, month, counter));
                 if (counter == day) {
-                    htmlContent += "<li class='hari dayNow'>" + counter + "</li>";
                     getDay(counter);
-                    updateEvents(new Date(year, month, counter));
                     Nameday = counter;
+                    if (okaydae) {
+                        htmlContent += "<li class='hari dayNow adaevent'>" + counter + "</li>";
+                    } else {
+                        htmlContent += "<li class='hari dayNow'>" + counter + "</li>";
+                    }
+                    okaydae = false;
                 } else {
-                    htmlContent += "<li class='hari'>" + counter + "</li>";
+                    if (okaydae) {
+                        htmlContent += "<li class='hari adaevent'>" + counter + "</li>";
+                    } else {
+                        htmlContent += "<li class='hari'>" + counter + "</li>";
+                    }
+                    okaydae = false;
                 }
                 weekdays2++;
                 counter++;
@@ -320,9 +333,7 @@ if (!isset($_SESSION['id'])) {
 
         function updateEvents(tanggal) {
             let events = "";
-            let format = "";
             dataArr.forEach((event) => {
-                console.log(tanggal.getDate());
                 let iyaudah = new Date(event.timeStart);
                 if (
                     ((tanggal.getDate() == iyaudah.getDate()) &&
@@ -330,6 +341,8 @@ if (!isset($_SESSION['id'])) {
                     (tanggal.getFullYear() == iyaudah.getFullYear()))
                 ) {
                     let level = "";
+
+                    okaydae = true;
 
                     switch (level) {
                         case 0:

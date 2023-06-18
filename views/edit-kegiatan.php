@@ -28,8 +28,10 @@ $row = mysqli_fetch_assoc($result);
     <div class="container">
         <h2>Update Kegiatannya cuy</h2>
         <span></span>
-        <form action="login.php" method="POST">
+        <form onsubmit="return editKegiatan()">
             <div class="form-field">
+                <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
+
                 <label for="title">Nama Kegiatan</label>
                 <input type="text" name="title" id="title" value="<?php echo $row['title'] ?>">
 
@@ -49,11 +51,9 @@ $row = mysqli_fetch_assoc($result);
                     <option value="2" <?php echo $row['level'] == 2 ? 'selected' : '' ?>>Sangat Penting</option>
                 </select>
 
-                <input type="hidden" name="id" value="<?php echo $id ?>">
-
                 <div style="margin-top: 15px;">
                     <a href="/" class="button form-sub">Kembali</a>
-                    <button class="button form-sub" onclick="editKegiatan()" id="iyakok">Simpan</button>
+                    <button class="button form-sub" id="iyakok">Simpan</button>
                 </div>                    
             </div>
         </form>
@@ -63,6 +63,8 @@ $row = mysqli_fetch_assoc($result);
         let message = document.getElementsByTagName("span")[0];
 
         function editKegiatan() {
+            window.event.preventDefault();
+            let iniID = document.getElementById("id");
             let title = document.getElementById("title");
             let lokasi = document.getElementById("lokasi");
             let timeStart = document.getElementById("timeStart");
@@ -92,26 +94,28 @@ $row = mysqli_fetch_assoc($result);
             }
 
             var data = {
+                id: iniID.value,
                 title: title.value,
                 lokasi: lokasi.value,
                 timeStart: timeStart.value,
                 timeEnd: timeEnd.value,
                 level: level.value,
-                id: <?php echo $id ?>
             };
 
             if (message.innerHTML === "") {
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "/api/edit-process.php", true);
+                xhr.open("POST", "/api/edit-kegiatan", true);
                 xhr.setRequestHeader("Content-Type", "application/json");
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE) {
                         const response = JSON.parse(xhr.response);
                         if (response.status === 1) {
-                            message.innerHTML = "Berhasil mengedit kegiatan";
-                            window.location.href = "/";
+                            // message.innerHTML = "Berhasil mengedit kegiatan";
+                            alert(response.message);
+                            window.location.href = `/`;
                         } else {
-                            message.innerHTML = "Gagal mengedit kegiatan";
+                            // message.innerHTML = "Gagal mengedit kegiatan";
+                            alert(response.message);
                         }
                     }
                 }

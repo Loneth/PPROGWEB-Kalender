@@ -599,3 +599,11 @@ ul.sukak-mu-dae {
 .event .iya-tanggal {
     font-size: 12px;
 }
+
+.adaevent {
+    background-color: #F2BE22;
+}
+
+.adaevent:hover {
+    background-color: #F29727 !important;
+}
