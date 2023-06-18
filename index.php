@@ -6,37 +6,53 @@ error_reporting(E_ALL);
 
 session_start();
 
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/config.php';
 
-$request = $_SERVER['REQUEST_URI'];
 $dirView = __DIR__ . "/views/";
 $dirController = __DIR__ . "/controllers/";
 
-switch ($request) {
-    case "/login":
+$url = explode('/', strtolower(substr($_SERVER['REQUEST_URI'], 1)));
+$arg = $_SERVER['REQUEST_URI'];
+
+switch ($url[0]) {
+    case "login":
         require $dirView . 'login.php';
         break;
-    case "/signup":
+    case "signup":
         require $dirView . 'signup.php';
         break;
-    case "/logout":
+    case "logout":
         require $dirView . 'logout.php';
+        break;
+    case "edit":
+        require $dirView . 'edit-kegiatan.php';
         break;
 
     /**
      * API Routes.
      */
-    case "/api/login":
-        require $dirController . 'login-process.php';
-        break;
-    case "/api/signup":
-        require $dirController . 'signup-process.php';
-        break;
-    case "/api/loadData":
-        require $dirController . 'loadData.php';
-        break;
-    case "/api/kegiatan":
-        require $dirController . 'kegiatan.php';
+    case "api":
+        switch ($url[1]) {
+            case "login":
+                require $dirController . 'login-process.php';
+                break;
+            case "signup":
+                require $dirController . 'signup-process.php';
+                break;
+            case "load-data":
+                require $dirController . 'loadData.php';
+                break;
+            case "add-kegiatan":
+                require $dirController . 'kegiatan.php';
+                break;
+            case "edit-kegiatan":
+                require $dirController . 'edit-process.php';
+                break;
+            case "":
+            case "/":
+            default:
+                print_r($url);
+        }
         break;
 
     /**
@@ -47,6 +63,5 @@ switch ($request) {
         require $dirView . 'home.php';
         break;
     default:
-        // echo $request;
         echo "default";
 };

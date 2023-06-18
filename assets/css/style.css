@@ -97,6 +97,16 @@ body {
     margin-left: auto;
 }
 
+.container-fluid {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+
 .row {
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
@@ -562,4 +572,22 @@ ul.sukak-mu-dae {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+.event:hover {
+    background-color: #F1F3F4;
+}
+
+.event a {
+    text-decoration: none;
+}
+
+.event .title {
+    color: #000;
+    position: relative;
+    margin-bottom: -12px;
+}
+
+.event .iya-tanggal {
+    font-size: 12px;
 }

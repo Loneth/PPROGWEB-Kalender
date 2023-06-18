@@ -24,12 +24,12 @@ if (!isset($_SESSION['id'])) {
             <li style="float:right"><a href="#about">About</a></li>
         </ul>
     </header>
+
     <main>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">
                     <button class="button form-sub" id="iyakok">Sign In</button>
-
                     <!-- Modal content -->
                     <div id="myModal" class="modal">
                         <div class="modal-content">
@@ -61,13 +61,13 @@ if (!isset($_SESSION['id'])) {
                             </div>
                         </div>
                     </div>
-
                     <div class="today-date">
                         <div class="event-day"></div>
                         <div class="event-date"></div>
                     </div>
                     <div class="events"></div>
                 </div>
+
                 <div class="col-md-8">
                     <div id="idx-calendar">
                         <div id="calendar-control">
@@ -86,8 +86,7 @@ if (!isset($_SESSION['id'])) {
                                 <li>Sabtu</li>
                             </ul>
                         </div>
-                        <div id="daysNum">
-                        </div>
+                        <div id="daysNum"></div>
                     </div>
                 </div>
             </div>
@@ -138,7 +137,7 @@ if (!isset($_SESSION['id'])) {
         initData();
 
         function initData() {
-            fetch('/api/loadData', {
+            fetch('/api/load-data', {
                     headers: {
                         'Accept': 'application/json'
                     }
@@ -227,6 +226,7 @@ if (!isset($_SESSION['id'])) {
             const dayName = dayNames[day.getDay()];
             eventDay.innerHTML = dayName;
             eventDate.innerHTML = tanggal + " " + monthNames[month] + " " + year;
+            updateEvents(day);
         }
 
         document.getElementById("nextMonth").onclick = function() {
@@ -302,7 +302,7 @@ if (!isset($_SESSION['id'])) {
                 level: eventLevel.value,
             }
             var xhr = new XMLHttpRequest();
-            xhr.open("POST", "/api/kegiatan", true);
+            xhr.open("POST", "/api/add-kegiatan", true);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -320,9 +320,9 @@ if (!isset($_SESSION['id'])) {
             dataArr.forEach((event) => {
                 let iyaudah = new Date(event.timeStart);
                 if (
-                    tanggal.getDay() == iyaudah.getDay() &&
-                    tanggal.getMonth() == iyaudah.getMonth() &&
-                    tanggal.getFullYear() == iyaudah.getFullYear()
+                    ((tanggal.getDay() == iyaudah.getDay()) &&
+                    (tanggal.getMonth() == iyaudah.getMonth()) &&
+                    (tanggal.getFullYear() == iyaudah.getFullYear()))
                 ) {
                     let level = "";
 
@@ -334,10 +334,14 @@ if (!isset($_SESSION['id'])) {
 
                     events += `
                         <div class="event">
-                            <input type="hidden" name="id" value="${event.id}">
-                            <div class="title">
-                                <h3> ${event.title} </h3>
-                            </div>
+                            <a href="/edit/${event.id}">
+                                <div class="title">
+                                    <h3>${event.title}</h3>
+                                </div>
+                                <div class="iya-tanggal">
+                                    <p>${event.timeStart}</p>
+                                </div>
+                            </a>
                         </div>
                     `;
                 }
