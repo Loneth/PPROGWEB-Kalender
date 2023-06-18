@@ -9,8 +9,8 @@ session_start();
 require_once __DIR__ . '/../config.php';
 
 $request = $_SERVER['REQUEST_URI'];
-$dirView = __DIR__ . "/../views/";
-$dirController = __DIR__ . "/../controllers/";
+$dirView = __DIR__ . "/views/";
+$dirController = __DIR__ . "/controllers/";
 
 switch ($request) {
     case "/login":
