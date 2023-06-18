@@ -29,12 +29,14 @@ if (!isset($_SESSION['id'])) {
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-4">
-                    <button class="button form-sub" id="iyakok">Sign In</button>
+                    <div class="u">
+                        <input class="button form-sub" type="button" value="Create Event" id="iyakok">
+                    </div>
                     <!-- Modal content -->
                     <div id="myModal" class="modal">
                         <div class="modal-content">
                             <span class="close">&times;</span>
-                            <form action="login.php" method="POST">
+                            <form onsubmit="return login1()">
                                 <div class="form-field">
                                     <label for="kegiatan">Nama Kegiatan</label>
                                     <input type="text" name="kegiatan" id="kegiatan" autofocus>
@@ -55,10 +57,10 @@ if (!isset($_SESSION['id'])) {
                                         <option value="2">Sangat Penting</option>
                                     </select>
                                 </div>
+                                <div style="margin-top: 15px;">
+                                    <input class="button form-sub" type="submit" value="Submit" id="simpan">
+                                </div>
                             </form>
-                            <div style="margin-top: 15px;">
-                                <button class="button form-sub" id="simpan">Simpan</button>
-                            </div>
                         </div>
                     </div>
                     <div class="today-date">
@@ -196,7 +198,7 @@ if (!isset($_SESSION['id'])) {
                     htmlContent += "</ul><ul>";
                 }
                 if (counter == day) {
-                    htmlContent += "<li class='dayNow'>" + counter + "</li>";
+                    htmlContent += "<li class='hari dayNow'>" + counter + "</li>";
                     getDay(counter);
                     updateEvents(new Date(year, month, counter));
                     Nameday = counter;
@@ -272,6 +274,8 @@ if (!isset($_SESSION['id'])) {
         }
 
         addEventSubmit.addEventListener("click", async () => {
+            window.event.preventDefault();
+
             var eventTitle = document.getElementById("kegiatan");
             var eventLokasi = document.getElementById("lokasi");
             var eventTimeStart = document.getElementById("timeStart");
@@ -318,9 +322,10 @@ if (!isset($_SESSION['id'])) {
             let events = "";
             let format = "";
             dataArr.forEach((event) => {
+                console.log(tanggal.getDate());
                 let iyaudah = new Date(event.timeStart);
                 if (
-                    ((tanggal.getDay() == iyaudah.getDay()) &&
+                    ((tanggal.getDate() == iyaudah.getDate()) &&
                     (tanggal.getMonth() == iyaudah.getMonth()) &&
                     (tanggal.getFullYear() == iyaudah.getFullYear()))
                 ) {

@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['username'])) {
+if (isset($_SESSION['id'])) {
     header("Location: /");
 }
 ?>
@@ -24,7 +24,7 @@ if (isset($_SESSION['username'])) {
                     <h2>Sign in</h2>
                     <div class="divider"></div>
                     <span></span>
-                    <form action="login.php" method="POST">
+                    <form name="login" onsubmit="return login1()">
                         <div class="form-field">
                             <label for="username">Username</label>
                             <input type="text" name="username" id="username">
@@ -35,33 +35,39 @@ if (isset($_SESSION['username'])) {
                         <p class="auth-link">
                             Not a member? <a href="/signup">Sign up now</a>
                         </p>
+                        <input class="button form-sub" type="submit" value="Log in">
                     </form>
-                    <button class="button form-sub" onclick="login()" id="iyakok">Sign In</button>
                 </div>
             </div>
         </div>
     </main>
     <script>
         let message = document.getElementsByTagName("span")[0];
-        function login() {
+
+        function login1() {
+            window.event.preventDefault();
+
             let username = document.getElementById("username");
             let password = document.getElementById("password");
 
             message.innerHTML = "";
 
-            if (username.value === "") {
+            if (username.value == "") {
                 message.innerHTML += "Username can't be blank <br>";
                 username.setAttribute("class", "fieldWithErrors");
             }
-            if (password.value === "") {
+
+            if (password.value == "") {
                 message.innerHTML += "Password can't be blank <br>";
                 password.setAttribute("class", "fieldWithErrors");
             }
-            var data = {
-                username: username.value,
-                password: password.value,
-            }
+
             if (message.innerHTML == "") {
+                var data = {
+                    username: username.value,
+                    password: password.value,
+                }
+
                 var xhr = new XMLHttpRequest();
                 xhr.open("POST", "/api/login", true);
                 xhr.setRequestHeader("Content-Type", "application/json");
