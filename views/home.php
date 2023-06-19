@@ -3,6 +3,7 @@ if (!isset($_SESSION['id'])) {
     header("Location: /login");
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -19,8 +20,6 @@ if (!isset($_SESSION['id'])) {
     <header>
         <ul class="sukak-mu-dae">
             <li><a class="active" href="#home">Home</a></li>
-            <li><a href="#news">News</a></li>
-            <li><a href="#contact">Contact</a></li>
             <li style="float:right"><a href="/logout">Logout</a></li>
         </ul>
     </header>
@@ -94,6 +93,13 @@ if (!isset($_SESSION['id'])) {
             </div>
         </div>
     </main>
+
+    <!-- <footer>
+        <div class="container">
+            <p>&copy; <?php echo date("Y"); ?> Buatan anak bangsa yang peduli dengan bangsa</p>
+        </div>
+    </footer> -->
+
     <script>
         let okaydae = false;
         var eventDay = document.querySelector(".event-day");
@@ -352,14 +358,16 @@ if (!isset($_SESSION['id'])) {
 
                     events += `
                         <div class="event">
-                            <a href="/edit/${event.id}">
-                                <div class="title">
-                                    <h3>${event.title}</h3>
-                                </div>
-                                <div class="iya-tanggal">
-                                    <p>${event.timeStart}</p>
-                                </div>
-                            </a>
+                            <div class="title">
+                                <h3>${event.title}</h3>
+                            </div>
+                            <div class="iya-tanggal">
+                                <p>${event.timeStart}</p>
+                            </div>
+                            <div class="event-options">
+                                <a href="/edit/${event.id}" class="event-edit">Edit</a>
+                                <a onclick="iyaga(${event.id})" class="event-delete">Hapus</a>
+                            </div>
                         </div>
                     `;
                 }
@@ -370,6 +378,14 @@ if (!isset($_SESSION['id'])) {
             }
 
             eventsContainer.innerHTML = events;
+        }
+
+        function iyaga(userid) {
+            let text = "Apakah anda benar ingin menghapusnya?";
+            if (confirm(text) == true) {
+                // text = "You pressed OK!";
+                window.location.href = `/delete/${userid}`;
+            }
         }
     </script>
 </body>

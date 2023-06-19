@@ -20,12 +20,10 @@ $row = mysqli_fetch_assoc($result);
     <header>
         <ul class="sukak-mu-dae">
             <li><a class="active" href="https://dae.lol/#home">Home</a></li>
-            <li><a href="https://dae.lol/#news">News</a></li>
-            <li><a href="https://dae.lol/#contact">Contact</a></li>
-            <li style="float:right"><a href="https://dae.lol/#about">About</a></li>
+            <li style="float:right"><a href="/logout">Logout</a></li>
         </ul>
     </header>
-    <div class="container">
+    <div class="form-edit">
         <h2>Update Kegiatannya cuy</h2>
         <span></span>
         <form onsubmit="return editKegiatan()">

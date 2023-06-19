@@ -2,9 +2,9 @@
 
 $DB_HOST = "127.0.0.1";
 $DB_PORT = 3306;
-$DB_DATABASE = "progwebdae";
-$DB_USERNAME = "root";
-$DB_PASSWORD = "test";
+$DB_DATABASE = "dae_progweb";
+$DB_USERNAME = "dae_root";
+$DB_PASSWORD = "123123123";
 
 $conn = new mysqli($DB_HOST, $DB_USERNAME, $DB_PASSWORD, $DB_DATABASE, $DB_PORT);
 

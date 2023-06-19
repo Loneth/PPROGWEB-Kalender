@@ -77,7 +77,7 @@ body {
 body {
     margin: 0;
     padding: 0;
-    background: #fff;
+    background: rgb(153, 153, 153);
     color: #0d0c22;
     font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -539,6 +539,7 @@ ul.sukak-mu-dae {
 
 .hari {
     cursor: pointer;
+    border-style: ridge;
 }
 
 .modal {
@@ -606,4 +607,42 @@ ul.sukak-mu-dae {
 
 .adaevent:hover {
     background-color: #F29727 !important;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    right: 320px;
+}
+
+.event-edit,
+.event-delete {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.event-edit:hover,
+.event-delete:hover {
+    background-color: #45a049;
+}
+
+.event-edit:focus,
+.event-delete:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+.form-edit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
 }

@@ -27,6 +27,9 @@ switch ($url[0]) {
     case "edit":
         require $dirView . 'edit-kegiatan.php';
         break;
+    case "delete":
+        require $dirView . 'delete-kegiatan.php';
+        break;
 
     /**
      * API Routes.
